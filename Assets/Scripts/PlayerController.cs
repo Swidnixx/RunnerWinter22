@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float forceY = 1;
     Rigidbody2D rb;
     new BoxCollider2D collider;
+    bool doubleJumped;
 
     private void Start()
     {
@@ -30,24 +31,34 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         RaycastHit2D hit = 
-            Physics2D.BoxCast(transform.position, collider.bounds.size, 0f, Vector2.down, 0.1f, 1 << 6);
+            Physics2D.BoxCast(transform.position, collider.bounds.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
 
         bool grounded = hit.collider == null ? false : true;
 
         if(grounded)
         {
             Debug.Log("Gracz uziemiony");
+            GetComponent<SpriteRenderer>().color = Color.green;
         }
         else
         {
             Debug.Log("Gracz w powietrzu");
+            GetComponent<SpriteRenderer>().color = Color.red;
         }
-        
-        //Debug.DrawLine(transform.position, transform.position + Vector3.down);
 
         if ( Input.GetMouseButtonDown(0) )
-        { 
-            rb.AddForce(new Vector2(0, forceY)); 
+        {
+            if ( grounded )
+            {
+                doubleJumped = false;
+                //rb.AddForce(new Vector2(0, forceY));  
+                rb.velocity = new Vector2(0, forceY);
+            }
+            else if(!doubleJumped)
+            {
+                doubleJumped = true; 
+                rb.velocity = new Vector2(0, forceY);
+            }
         }
     }
 }
