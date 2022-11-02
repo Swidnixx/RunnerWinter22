@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float forceY = 1;
+    public float fallingSpeed = -1;
+    //public float liftingForce = 10;
+
     Rigidbody2D rb;
     new BoxCollider2D collider;
     bool doubleJumped;
@@ -58,6 +61,15 @@ public class PlayerController : MonoBehaviour
             {
                 doubleJumped = true; 
                 rb.velocity = new Vector2(0, forceY);
+            }
+        }
+
+        if( Input.GetMouseButton(0) )
+        {
+            if(rb.velocity.y < 0)
+            {
+                rb.velocity = new Vector2(0, fallingSpeed);
+                //rb.AddForce(new Vector2(0, Time.deltaTime * -rb.velocity.y * liftingForce));
             }
         }
     }

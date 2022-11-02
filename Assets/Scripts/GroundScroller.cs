@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GroundScroller : MonoBehaviour
 {
-    public float speed = 0.1f;
     public Transform ground1, ground2;
 
     private void FixedUpdate()
     {
+        float speed = GameManager.Instance.worldScrollingSpeed;
         ground1.position -= new Vector3( speed, 0, 0); 
         ground2.position -= new Vector3( speed, 0, 0); 
 
