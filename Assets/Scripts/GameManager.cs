@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class GameManager : MonoBehaviour
     public float worldScrollingSpeed = 0.1f;
 
     public TextMeshProUGUI scoreText;
+
+    public Button resetButton;
 
     float score = 0;
 
@@ -30,4 +34,12 @@ public class GameManager : MonoBehaviour
         score += worldScrollingSpeed;
         scoreText.text = score.ToString("0");
     }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        resetButton.gameObject.SetActive(true);
+    }
+
+
 }

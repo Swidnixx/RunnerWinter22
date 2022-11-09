@@ -5,6 +5,7 @@ using UnityEngine;
 public class GroundScroller : MonoBehaviour
 {
     public Transform ground1, ground2;
+    public GameObject[] grounds;
 
     private void FixedUpdate()
     {
@@ -14,11 +15,15 @@ public class GroundScroller : MonoBehaviour
 
         if(ground2.position.x < 0)
         {
-            ground1.position += new Vector3( ground1.lossyScale.x * 2, 0, 0);
+            Destroy(ground1.gameObject);
 
-            var tmp = ground1;
+            int index = Random.Range(0, grounds.Length);
+            GameObject newGround = Instantiate(grounds[index]);
+            newGround.transform.position = ground2.position 
+                + new Vector3(newGround.transform.lossyScale.x, 0, 0 );
+
             ground1 = ground2;
-            ground2 = tmp;
+            ground2 = newGround.transform;
         }
     }
 }
