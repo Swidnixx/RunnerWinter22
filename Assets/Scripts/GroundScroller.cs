@@ -20,7 +20,7 @@ public class GroundScroller : MonoBehaviour
             int index = Random.Range(0, grounds.Length);
             GameObject newGround = Instantiate(grounds[index]);
             newGround.transform.position = ground2.position 
-                + new Vector3(newGround.transform.lossyScale.x, 0, 0 );
+                + new Vector3(newGround.GetComponent<SpriteRenderer>().bounds.size.x, 0, 0 );
 
             ground1 = ground2;
             ground2 = newGround.transform;

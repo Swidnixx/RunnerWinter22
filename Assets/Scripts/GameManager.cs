@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Button resetButton;
 
     float score = 0;
+    int coins = 0;
 
     private void Awake()
     {
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Multiple GMs in the Scene");
         }
+    }
+    private void Start()
+    {
+        Debug.Log("Coins: " + PlayerPrefs.GetInt("Coins"));
+        coins = PlayerPrefs.GetInt("Coins");
     }
 
     private void FixedUpdate()
@@ -46,5 +52,11 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+    }
+   
+    public void CoinCollected()
+    {
+        coins++;
+        PlayerPrefs.SetInt("Coins", coins);
     }
 }

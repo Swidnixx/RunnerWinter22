@@ -80,5 +80,11 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.GameOver();
         }
+
+        if(collision.CompareTag("Coin"))
+        {
+            Destroy(collision.gameObject);
+            GameManager.Instance.CoinCollected();
+        }
     }
 }
