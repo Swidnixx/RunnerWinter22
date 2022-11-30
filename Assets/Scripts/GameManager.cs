@@ -9,15 +9,16 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
     public float worldScrollingSpeed = 0.1f;
 
     public TextMeshProUGUI scoreText;
-
+    public TextMeshProUGUI coinsText;
     public Button resetButton;
 
     float score = 0;
     int coins = 0;
+
+    SpriteRenderer player;
 
     private void Awake()
     {
@@ -32,8 +33,10 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log("Coins: " + PlayerPrefs.GetInt("Coins"));
         coins = PlayerPrefs.GetInt("Coins");
+        coinsText.text = coins.ToString();
+
+        player = FindObjectOfType<PlayerController>().transform.GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -58,5 +61,21 @@ public class GameManager : MonoBehaviour
     {
         coins++;
         PlayerPrefs.SetInt("Coins", coins);
+        coinsText.text = coins.ToString();
+    }
+
+    public bool immortal;
+    public float immortalTime = 5;
+    public void BatteryCollected()
+    {
+        Debug.Log("Battery collected");
+        immortal = true;
+        player.color = Color.red;
+
+        Invoke(nameof(CancelBattery), immortalTime);
+    }
+    void CancelBattery()
+    {
+        immortal = false;
     }
 }

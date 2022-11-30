@@ -38,16 +38,16 @@ public class PlayerController : MonoBehaviour
 
         bool grounded = hit.collider == null ? false : true;
 
-        if(grounded)
-        {
-            Debug.Log("Gracz uziemiony");
-            GetComponent<SpriteRenderer>().color = Color.green;
-        }
-        else
-        {
-            Debug.Log("Gracz w powietrzu");
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
+        //if(grounded)
+        //{
+        //    Debug.Log("Gracz uziemiony");
+        //    GetComponent<SpriteRenderer>().color = Color.green;
+        //}
+        //else
+        //{
+        //    Debug.Log("Gracz w powietrzu");
+        //    GetComponent<SpriteRenderer>().color = Color.red;
+        //}
 
         if ( Input.GetMouseButtonDown(0) )
         {
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Obstacle"))
+        if(collision.CompareTag("Obstacle") && !GameManager.Instance.immortal)
         {
             GameManager.Instance.GameOver();
         }
@@ -85,6 +85,12 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             GameManager.Instance.CoinCollected();
+        }
+
+        if(collision.CompareTag("Battery"))
+        {
+            Destroy(collision.gameObject);
+            GameManager.Instance.BatteryCollected();
         }
     }
 }
