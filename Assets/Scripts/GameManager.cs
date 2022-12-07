@@ -8,16 +8,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    //Singleton
     public static GameManager Instance;
+
+    //Game Settings
     public float worldScrollingSpeed = 0.1f;
-
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI coinsText;
-    public Button resetButton;
-
     float score = 0;
     int coins = 0;
 
+    //Powerups
+    public Battery battery;
+    public Magnet magnet;
+
+    //UI
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI coinsText;
+    public Button resetButton;
     SpriteRenderer player;
 
     private void Awake()
@@ -33,6 +39,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        battery.isActive = false;
         coins = PlayerPrefs.GetInt("Coins");
         coinsText.text = coins.ToString();
 
@@ -64,18 +71,37 @@ public class GameManager : MonoBehaviour
         coinsText.text = coins.ToString();
     }
 
-    public bool immortal;
-    public float immortalTime = 5;
     public void BatteryCollected()
     {
         Debug.Log("Battery collected");
-        immortal = true;
-        player.color = Color.red;
+        if (battery.isActive)
+        {
+            CancelInvoke(nameof(CancelBattery));
+            CancelBattery();
+        }
 
-        Invoke(nameof(CancelBattery), immortalTime);
+        battery.isActive = true;
+        player.color = Color.red;
+        worldScrollingSpeed += battery.speedBoost;
+
+        Invoke(nameof(CancelBattery), battery.immortalTime);
     }
     void CancelBattery()
     {
-        immortal = false;
+        battery.isActive = false;
+        player.color = Color.white;
+        worldScrollingSpeed -= battery.speedBoost;
+    }
+
+    public void MagnetCollected()
+    {
+        if (magnet.isActive)
+            CancelInvoke(nameof(CancelMagnet));
+        magnet.isActive = true;
+        Invoke(nameof(CancelMagnet), 5);
+    }
+    void CancelMagnet()
+    {
+        magnet.isActive = false;
     }
 }
