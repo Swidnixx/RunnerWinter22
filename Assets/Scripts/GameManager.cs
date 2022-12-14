@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         battery.isActive = false;
+        magnet.isActive = false;
+
         coins = PlayerPrefs.GetInt("Coins");
         coinsText.text = coins.ToString();
 
