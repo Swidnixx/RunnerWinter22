@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Battery3
   m_EditorClassIdentifier: 
   isActive: 0
-  immortalTime: 5
-  speedBoost: 0.1
+  immortalTime: 15
+  speedBoost: 0.3
+  level: 3
+  upgradeCost: 12000
+  upgraded: {fileID: 0}

@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 919163e8ccff1cc4f9308365f5005c98, type: 3}
-  m_Name: Battery2
+  m_Script: {fileID: 11500000, guid: 2ee20012dab397e49a1f510ebb1d9507, type: 3}
+  m_Name: Magnet2
   m_EditorClassIdentifier: 
   isActive: 0
-  immortalTime: 10
-  speedBoost: 0.2
+  duration: 20
+  range: 7
+  coinsSpeed: 0.03
   level: 2
-  upgradeCost: 5000
-  upgraded: {fileID: 11400000, guid: 04204595812b95e4281b2c162005ab77, type: 2}
+  upgradeCost: 10000
+  upgraded: {fileID: 0}

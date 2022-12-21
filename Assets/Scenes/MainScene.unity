@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldScrollingSpeed: 0.1
+  powerupManager: {fileID: 11400000, guid: 71a744ddda66deb44afc5408a9cff4d5, type: 2}
   battery: {fileID: 11400000, guid: f90420907afd234408a3cca63a002f99, type: 2}
   magnet: {fileID: 11400000, guid: 6c1505851443d8e4ab5bb22f997f6c62, type: 2}
   scoreText: {fileID: 2134957131}

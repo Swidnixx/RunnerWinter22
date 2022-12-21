@@ -16,3 +16,6 @@ MonoBehaviour:
   duration: 10
   range: 5
   coinsSpeed: 0.02
+  level: 1
+  upgradeCost: 500
+  upgraded: {fileID: 11400000, guid: 5d3ea3e9bb73bf346affd1799beb5ee6, type: 2}

@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     int coins = 0;
 
     //Powerups
-    public Battery battery;
-    public Magnet magnet;
+    public PowerupManager powerupManager;
+    [HideInInspector] public Battery battery;
+    [HideInInspector] public Magnet magnet;
 
     //UI
     public TextMeshProUGUI scoreText;
@@ -39,6 +40,9 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        battery = powerupManager.Battery;
+        magnet = powerupManager.Magnet;
+
         battery.isActive = false;
         magnet.isActive = false;
 
